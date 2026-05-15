@@ -26,6 +26,8 @@ export class Helicopter {
     this.gunnerDoorRight = null;
     this.rotor = null;
     this.tailRotor = null;
+    this.loadedMainRotor = null;
+    this.loadedTailRotor = null;
     this.machineGunLeft = null;
     this.machineGunRight = null;
     this.machineGun = null;
@@ -130,6 +132,8 @@ export class Helicopter {
     }
 
     model.position.y = -0.45;
+    this.loadedMainRotor = model.getObjectByName("MainRotor");
+    this.loadedTailRotor = model.getObjectByName("TailRotor");
     this.modelRoot.clear();
     this.modelRoot.add(model);
     this.proceduralExterior.visible = false;
@@ -275,5 +279,11 @@ export class Helicopter {
   update(delta, rotorSpeed) {
     this.rotor.rotation.y += delta * rotorSpeed;
     this.tailRotor.rotation.x += delta * rotorSpeed * 2;
+    if (this.loadedMainRotor) {
+      this.loadedMainRotor.rotation.y += delta * rotorSpeed;
+    }
+    if (this.loadedTailRotor) {
+      this.loadedTailRotor.rotation.x += delta * rotorSpeed * 2.4;
+    }
   }
 }

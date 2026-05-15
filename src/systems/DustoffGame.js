@@ -7,7 +7,7 @@ import { DustoffWorld } from "./world.js";
 import { SoundDesign } from "./audio.js";
 
 const BLACKHAWK_MODEL_URL = new URL(
-  "../../models/Meshy_AI_Black_Hawk_in_Flight_0426234111_texture.glb",
+  "../../models/Blackhawk-rotors-rigged.glb",
   import.meta.url
 ).href;
 
@@ -218,14 +218,14 @@ export class DustoffGame {
     const metalMat = new THREE.MeshBasicMaterial({ color: "#22251f" });
 
     const doorSill = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.16, 1.45), frameMat);
-    doorSill.position.set(0.58, -0.68, -1.35);
+    doorSill.position.set(0.54, -0.68, -1.1);
     doorSill.rotation.y = -0.08;
     group.add(doorSill);
 
     const gun = new THREE.Group();
     gun.name = "Viewmodel Chain Gun";
-    gun.position.set(-0.08, -0.32, -1.36);
-    gun.scale.setScalar(0.74);
+    gun.position.set(-0.06, -0.38, -1.05);
+    gun.scale.setScalar(0.86);
     group.add(gun);
     this.gunnerViewGun = gun;
 
@@ -409,6 +409,7 @@ export class DustoffGame {
     this.heliSpeed = 0;
     this.message = "Autopilot engaged. Cover the pickup from the side gun.";
     this.overlay.classList.remove("complete", "failed");
+    this.startButton.textContent = "Deploy";
     this.restoreBriefingOverlay();
     this.updateHud();
   }
@@ -1058,6 +1059,7 @@ export class DustoffGame {
     this.audio.missionComplete();
     this.overlay.classList.remove("hidden");
     this.overlay.classList.add("complete");
+    this.startButton.textContent = "Replay Mission";
     this.overlay.querySelector("p").textContent = "Mission Complete";
     this.overlay.querySelector("h1").textContent = "Dustoff successful";
     this.overlay.querySelector("ul").innerHTML = `
@@ -1073,6 +1075,7 @@ export class DustoffGame {
     this.audio.warning();
     this.overlay.classList.remove("hidden");
     this.overlay.classList.add("failed");
+    this.startButton.textContent = "Try Again";
     this.overlay.querySelector("p").textContent = "Mission Failed";
     this.overlay.querySelector("h1").textContent = "Run aborted";
     this.overlay.querySelector("ul").innerHTML = `

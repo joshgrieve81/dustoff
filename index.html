@@ -8,9 +8,13 @@
       name="description"
       content="A browser-based Three.js prototype for a retro helicopter rescue mission."
     />
+    <link rel="stylesheet" href="./dist/assets/index-D5Hi7u81.css" />
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module">
+      const entry = location.port === "5173" ? "/src/main.js" : "./dist/assets/index-LyZqGDfM.js";
+      await import(entry);
+    </script>
   </body>
 </html>
